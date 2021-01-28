@@ -1,11 +1,28 @@
 const express = require('express');
 
+const morgan = require('morgan');
+
 // express app
 const app = express();
 
 // register view eninge
 
 app.set('view engine', 'ejs');
+
+// Listen for requests
+app.listen(3000);
+
+app.use(express.static('public'));
+app.use(morgan('combined'));
+
+/*app.use((req, res, next) => {
+    console.log('new request made');
+    console.log(req.hostname);
+    console.log(req.path);
+    console.log(req.method);
+    next();
+});*/
+
 
 app.get('/', (req, res) => {
     // res.send(`<p>Home Page</p>`);
@@ -20,6 +37,11 @@ app.get('/', (req, res) => {
         title: 'Home', blogs
     });
 });
+
+/*app.use((req, res, next) => {
+    console.log('in the next middleware');
+    next();
+});*/
 
 app.get('/about', (req, res) => {
     res.render('about', {
@@ -40,4 +62,3 @@ app.use((req, res) => {
     });
 });
 
-app.listen(3000);
