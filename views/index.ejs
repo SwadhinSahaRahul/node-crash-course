@@ -14,6 +14,8 @@
         <% blogs.forEach(blog => { %>
             <h3 class="title"><%= blog.title %></h3>
             <p class="snippet"><%= blog.snippet %></p>
+            <p class="snippet"><%= blog.body %></p>
+            <a href="/blog/<%= blog._id %>">Details</a>
         <% }) %>
     <% } else { %>
         <p>There Are no blogs to display.</p>
