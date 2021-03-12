@@ -6,14 +6,19 @@ const Blog = require('../models/blog');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    // res.send(`<p>Home Page</p>`);
-    //res.sendFile('./views/index.html', {root: __dirname});
-    /*const blogs = [
-        {title: 'Blog1', snippet: "Blog Snippet1"},
-        {title: 'Blog2', snippet: "Blog Snippet2"},
-        {title: 'Blog3', snippet: "Blog Snippet3"},
-    ];*/
 
+    res.redirect('/blogs');
+
+});
+
+router.get('/about', hostDetails, (req, res) => {
+    res.render('about', {
+        title: 'About'
+    });
+});
+
+// Blog Routes
+router.get('/blogs', (req, res) => {
 
     Blog.find()
         .then((blogs) => {
@@ -30,17 +35,30 @@ router.get('/', (req, res) => {
 router.get('/blog/:id', (req, res) => {
     Blog.findById(req.params.id)
         .then((blog) => {
-            res.send(blog)
+            res.render('details', {
+                title: 'Details', blog
+            })
         })
         .catch((error) => {
 
         });
 });
 
-router.get('/about', hostDetails, (req, res) => {
-    res.render('about', {
-        title: 'About'
+router.get('/blogs/create', (req, res) => {
+    res.render('create', {
+        title: 'Create Blog'
     });
+});
+
+router.post('/blogs/create', (req, res) => {
+    const blog = new Blog(req.body);
+    blog.save()
+        .then((result) => {
+            res.redirect('/blogs');
+        })
+        .catch((error) => {
+
+        });
 });
 
 module.exports = {

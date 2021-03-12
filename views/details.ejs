@@ -1,0 +1,32 @@
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<%- include('./partials/nav.ejs') %>
+
+<div class="create-blog content">
+
+    <h1>Create Blog</h1>
+
+    <div>
+        <h2><%= blog.title %></h2>
+        <p><%= blog.snippet %></p>
+        <p><%= blog.body %></p>
+        <button id="delete" data-doc="<%= blog._id %>">Delete</button>
+    </div>
+
+</div>
+
+<%- include('./partials/footer.ejs') %>
+
+<script>
+    const trashcan = document.getElementById("delete");
+    trashcan.addEventListener('click', function () {
+        console.log(trashcan.data.doc);
+    });
+</script>
+
+</body>
+</html>
