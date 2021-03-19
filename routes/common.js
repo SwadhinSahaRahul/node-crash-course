@@ -44,6 +44,19 @@ router.get('/blog/:id', (req, res) => {
         });
 });
 
+router.delete('/blog/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findByIdAndDelete(id)
+        .then((result) => {
+            res.json({
+                redirect: `/blogs`
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+});
+
 router.get('/blogs/create', (req, res) => {
     res.render('create', {
         title: 'Create Blog'

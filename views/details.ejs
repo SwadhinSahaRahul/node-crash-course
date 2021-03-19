@@ -14,7 +14,7 @@
         <h2><%= blog.title %></h2>
         <p><%= blog.snippet %></p>
         <p><%= blog.body %></p>
-        <button id="delete" data-doc="<%= blog._id %>">Delete</button>
+        <button id="delete-button" data-doc="<%= blog._id %>">Delete</button>
     </div>
 
 </div>
@@ -22,9 +22,22 @@
 <%- include('./partials/footer.ejs') %>
 
 <script>
-    const trashcan = document.getElementById("delete");
-    trashcan.addEventListener('click', function () {
-        console.log(trashcan.data.doc);
+    const trashcan = document.getElementById("delete-button");
+
+    trashcan.addEventListener('click', function (e) {
+        const endpoint = `/blog/${trashcan.dataset.doc}`;
+        fetch(endpoint, {
+            method: 'DELETE',
+        })
+            .then((response) => {
+                return response.json()
+            })
+            .then((data) => {
+                window.location.href = data.redirect;
+            })
+            .catch((error) => {
+
+            });
     });
 </script>
 
