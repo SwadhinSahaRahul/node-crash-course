@@ -1,10 +1,10 @@
 <html lang="en">
 
-<%- include('./partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 
 <body>
 
-<%- include('./partials/nav.ejs') %>
+<%- include('../partials/nav.ejs') %>
 
 <div class="create-blog content">
 
@@ -19,13 +19,13 @@
 
 </div>
 
-<%- include('./partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>
 
 <script>
     const trashcan = document.getElementById("delete-button");
 
     trashcan.addEventListener('click', function (e) {
-        const endpoint = `/blog/${trashcan.dataset.doc}`;
+        const endpoint = `/blogs/${trashcan.dataset.doc}`;
         fetch(endpoint, {
             method: 'DELETE',
         })

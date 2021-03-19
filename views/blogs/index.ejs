@@ -1,10 +1,10 @@
 <html lang="en">
 
-<%- include('./partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 
 <body>
 
-<%- include('./partials/nav.ejs') %>
+<%- include('../partials/nav.ejs') %>
 
 <div class="blogs content">
 
@@ -15,7 +15,7 @@
             <h3 class="title"><%= blog.title %></h3>
             <p class="snippet"><%= blog.snippet %></p>
             <p class="snippet"><%= blog.body %></p>
-            <a href="/blog/<%= blog._id %>">Details</a>
+            <a href="/blogs/<%= blog._id %>">Details</a>
         <% }) %>
     <% } else { %>
         <p>There Are no blogs to display.</p>
@@ -23,7 +23,7 @@
 
 </div>
 
-<%- include('./partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>
 
 </body>
 </html>

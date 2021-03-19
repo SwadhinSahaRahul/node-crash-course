@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 // express app
 const app = express();
 
-// connect to Mogobd\
+// connect to MongoDB
 const dbURI = 'mongodb+srv://root:Rahul04312173478@nodecrashcourse.1cxxb.mongodb.net/NodeCrashCourse?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
@@ -28,20 +28,14 @@ app.use(express.static('public'));
 
 //app.use(morgan('combined'));
 
-/*app.use((req, res, next) => {
-    console.log('new request made');
-    console.log(req.hostname);
-    console.log(req.path);
-    console.log(req.method);
-    next();
-});*/
-const {router: commonRoutes} = require('./routes/common');
+const {router: commonRoutes} = require('./routes/CommonRoutes');
+const {router: blogRoutes} = require('./routes/BlogRoutes');
 
 app.use(commonRoutes);
+app.use('/blogs', blogRoutes);
 
 app.use((req, res) => {
     res.status(404).render('404', {
         title: 'Not Found'
     });
 });
-
